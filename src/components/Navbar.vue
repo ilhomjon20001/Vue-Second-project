@@ -5,21 +5,33 @@
             <div class="box_div">
                 <p @click="Homehendler" class="box_div_paragrf">Ilhomjon</p>
             </div>
-            <div class="box_btn">
+            <template v-if="inloged">
+                <div>{{ user.username }}</div>
+            </template>
+            <template v-else-if="!inloged">
+                <div class="box_btn">
                 <RouterLink class="up" :to="{name: 'Login'}">Login</RouterLink>
                 <RouterLink class="in" :to="{name: 'Register'}">Registir</RouterLink>
-            </div>
+                </div>
+            </template>
         </div>
     </div>
 </header>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
     methods:{
         Homehendler(){
             return this.$router.push('/')
         }
+    },
+    computed: {
+        ...mapState({
+            user: state => state.auth.user,
+            inloged: state => state.auth.inloged,
+        })
     }
 }
 </script>
