@@ -15,7 +15,7 @@ export default {
     RouterView,
   },
   mounted() {
-    this.$store.dispatch("getuserj")
+    this.$store.dispatch("getUser")
   }
 }
 </script>

@@ -7,7 +7,7 @@ const Authconstruk = {
      login(user){
       return axios.post('/users/login', {user})
      },
-     getuser(){
+     currentUser(){
       return axios.get('/user')
      }
 }

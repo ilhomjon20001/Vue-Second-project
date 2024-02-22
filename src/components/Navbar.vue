@@ -6,9 +6,12 @@
                 <p @click="Homehendler" class="box_div_paragrf">Ilhomjon</p>
             </div>
             <template v-if="inloged">
-                <div>{{ user.username }}</div>
+                <div class="d-flex gap-5">
+                    <div>{{ user.username }}</div>
+                    <a @click="logautHandler" href="#" class="text-dark text-decoration-none">Logout</a>
+                </div>
             </template>
-            <template v-else-if="!inloged">
+            <template v-else-if="isAnonymous">
                 <div class="box_btn">
                 <RouterLink class="up" :to="{name: 'Login'}">Login</RouterLink>
                 <RouterLink class="in" :to="{name: 'Register'}">Registir</RouterLink>
@@ -20,18 +23,27 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState,mapGetters } from 'vuex';
+import { gettertyps } from "../moduls/type"
 export default {
     methods:{
-        Homehendler(){
+        Homehendler() {
             return this.$router.push('/')
+        },
+        logautHandler() {
+             this.$store.dispatch('logAut')
         }
     },
     computed: {
-        ...mapState({
-            user: state => state.auth.user,
-            inloged: state => state.auth.inloged,
-        })
+        // ...mapState({
+        //     user: state => state.auth.user,
+        //     inloged: state => state.auth.inloged,
+        // }),
+        ...mapGetters({
+            user: gettertyps.currentUser,
+            inloged: gettertyps.inloged,
+            isAnonymous: gettertyps.isAnonymous
+        }),
     }
 }
 </script>

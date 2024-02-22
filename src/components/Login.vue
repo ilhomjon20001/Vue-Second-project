@@ -42,7 +42,6 @@ export default {
                 password: this.password
             }
             this.$store.dispatch('login', data).then(user => {
-                console.log('USER', user);
                 this.$router.push({name: 'Home'})
             }).catch(err => {
                 console.log('ERROR', err);
